@@ -1,4 +1,4 @@
-:host {
+/* :host {
   --content-padding: 10px;
 }
 header {
@@ -10,14 +10,6 @@ header {
 .content {
   padding: var(--content-padding);
 }
-#product_container{
-  width: 60%;
-  height: auto;
-}
-.giao_dien_sp {
-  width: 100%;
-  display: flex;
-}
 #navbar {
   width: auto;
   height: 120px;
@@ -28,4 +20,10 @@ header {
   width: 120px;
   height: 120px;
   background-color: greenyellow;
+  cursor: pointer;
 }
+#table_viewer{
+  width: 75%;
+  height: 700px;
+  border: 3px black;
+} */
