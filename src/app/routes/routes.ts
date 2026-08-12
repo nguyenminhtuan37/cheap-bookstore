@@ -11,10 +11,12 @@ export const routeConfig: Routes = [
     {
         path: 'category',
         component: Category,
+        title: "Category"
     },
     {
         path: 'product',
         component: Product,
+        title: "Product"
     },
     {
         path: '**',
