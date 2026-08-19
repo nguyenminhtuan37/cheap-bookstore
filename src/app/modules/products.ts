@@ -14,7 +14,7 @@ export interface ProductInfo {
     trang_thai: boolean,
 }
 export interface ProductState {
-  Products: Product[] | null,
+  Products: ProductInfo[] | null,
 }
 @Component({
     selector: "product",
@@ -22,6 +22,7 @@ export interface ProductState {
     template: `
     <div id="table-legend">
       <span class="column-name">Tên sản phẩm</span>
+      <span class="column-name">Id sản phẩm</span>
       <span class="column-name">Danh mục</span>
       <span class="column-name">Đơn vị tính</span>
       <span class="column-name">Giá nhập</span>
@@ -30,9 +31,10 @@ export interface ProductState {
       <span class="column-name">Mức tồn tối thiểu</span>
       <span class="column-name">Trạng thái</span>
     </div>
-      @for (item of items; track items) {
+      @for (item of items; track item) {
         <div class="product-container">
           <span class="text_sp"> {{ item.ten_sp }} </span>
+          <span class="text_sp"> {{ item.id_sp }} </span>
           <div class="text_sp"> {{ item.danh_muc }} </div>
           <div class="text_sp"> {{ item.don_vi_tinh }} </div>
           <div class="text_sp"> {{ item.gia_nhap }} </div>
@@ -41,7 +43,7 @@ export interface ProductState {
           <div class="text_sp"> {{ item.muc_ton_toi_thieu }} </div>
           <div class="text_sp"> {{ item.trang_thai }} </div>
           <div class="ActionButton">Edit</div>
-          <div class="ActionButton" (click)="DestroyProduct($event)">Delete</div>
+          <div class="ActionButton" (click)="DestroyProduct(item.id_sp)">Delete</div>
         </div>
       }
     `,
@@ -50,7 +52,17 @@ export interface ProductState {
 export class Product {
   private dataSync = inject(DataSync);
   private localStorageService = inject(LocalStorageService);  
-  
+  readonly items = this.dataSync.state().Products ?? [];
+  constructor() {
+    console.log(this.items);
+  }
+  DestroyProduct(id_sp: number) {
+    // something...
+    const items = this.dataSync.state().Products ?? [];
+    this.dataSync.state.set({
+      Products: items.filter((item) => item.id_sp !== id_sp),
+    });
+  }
 }
 
       

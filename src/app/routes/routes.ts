@@ -1,12 +1,13 @@
 import {Routes} from '@angular/router';
 import {Category} from '../modules/Category';
 import {Product} from '../modules/products';
-import {App} from '../app'
+import {Home} from '../modules/home'
 
 export const routeConfig: Routes = [
     {
         path: '',
-        component: App,
+        component: Home,
+        title: 'homepage',
     },
     {
         path: 'category',

@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { LocalStorageService } from './service/local-storage.service';
 import data from "./data.json";
+import defCate from "./category.json";
 import { RouterOutlet, RouterLink } from '@angular/router';
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
@@ -17,8 +18,6 @@ export class App {
   private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    console.log("it ran!")
-    console.log(data);
     this.saveData();
   }
   saveData(): void {

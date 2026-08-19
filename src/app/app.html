@@ -23,10 +23,13 @@
       </div>
       <div id="sorting-bar">
         <div class="">Sort by:</div>
-        <div class=""></div>
+        <select name="sort&select" id="sort-select">
+          <option value="">Mặc định</option>
+          <option value="By Id">Id</option>
+          <option value="sell_price">Giá bán</option>
+          <option value="remaining">Số lượng tồn</option>
+        </select>
       </div>
       <router-outlet />
-    
-    
 </body>
 </html>

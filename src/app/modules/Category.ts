@@ -1,27 +1,35 @@
-import { Component } from "@angular/core";
+import { Component, signal } from "@angular/core";
+import { LocalStorageService } from "../service/local-storage.service";
+import  demoCates  from "../category.json";
+
 export interface category {
     name: string,
     id: number,
     desc: string,
-
 }
+export interface categories {
+    Category_list: category[] | null;
+}
+
 @Component({
     standalone: true,
     selector: "category",
     template: `
-  Just some Categories!
+
     `,
 })
 export class Category{
-    // Products: Product = {
-    //     "id_sp": 1343234,
-    //     "ten_sp": "",
-    //     "danh_muc": "",
-    //     "don_vi_tinh": "",
-    //     "gia_nhap": 1234,
-    //     "gia_ban": 1233,
-    //     "so_luong_ton": 12,
-    //     "muc_ton_toi_thieu": 3,
-    //     "trang_thai": true
-    // }
+    // private data = signal<categories>(
+    //     JSON.parse(demoCates) as categories
+    // )
 }
+    // <table>
+    // @for (cate of demoCate; track cate.id) {}
+    // <tr>
+    //     <td>{{ demoCates.name }}</td>
+    //     <td>{{ demoCates.id }}</td>
+    //     <td>{{ demoCates.desc }}</td>
+    //     <button>Chỉnh sửa</button>
+    //     <button>Xóa</button>
+    // </tr>
+    // </table>
