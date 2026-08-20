@@ -19,6 +19,7 @@ export interface categories {
     `,
 })
 export class Category{
+    demoCates = ['Truyện tranh', 'Truyện chữ', 'Sách giáo khoa, chuyên đề']
     // private data = signal<categories>(
     //     JSON.parse(demoCates) as categories
     // )

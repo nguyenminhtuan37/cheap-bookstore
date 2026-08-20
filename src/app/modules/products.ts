@@ -1,7 +1,8 @@
-import { Component, inject, signal } from "@angular/core";
+import { Component, inject, input, OnChanges, signal } from "@angular/core";
 import { LocalStorageService } from "../service/local-storage.service";
 import { DataSync } from "../service/updateData.service";
 import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
+import { filter } from "rxjs";
 export interface ProductInfo {
     id_sp: number,
     ten_sp: string,
@@ -31,7 +32,7 @@ export interface ProductState {
       <span class="column-name">Mức tồn tối thiểu</span>
       <span class="column-name">Trạng thái</span>
     </div>
-      @for (item of items; track item) {
+      @for (item of items; track $index) {
         <div class="product-container">
           <span class="text_sp"> {{ item.ten_sp }} </span>
           <span class="text_sp"> {{ item.id_sp }} </span>
@@ -42,19 +43,21 @@ export interface ProductState {
           <div class="text_sp"> {{ item.so_luong_ton }} </div>
           <div class="text_sp"> {{ item.muc_ton_toi_thieu }} </div>
           <div class="text_sp"> {{ item.trang_thai }} </div>
-          <div class="ActionButton">Edit</div>
+          <div class="ActionButton" (click)="EditProduct(item.id_sp)">Edit</div>
           <div class="ActionButton" (click)="DestroyProduct(item.id_sp)">Delete</div>
         </div>
       }
     `,
     imports: []
 })
-export class Product {
+export class Product  {
   private dataSync = inject(DataSync);
-  private localStorageService = inject(LocalStorageService);  
-  readonly items = this.dataSync.state().Products ?? [];
+  private localStorageService = inject(LocalStorageService);
+  items = this.dataSync.state().Products ?? [];
+  filteredItems: ProductInfo[] = [];
   constructor() {
-    console.log(this.items);
+    this.filteredItems = this.items;
+    console.log(this.filteredItems);
   }
   DestroyProduct(id_sp: number) {
     // something...
@@ -62,6 +65,10 @@ export class Product {
     this.dataSync.state.set({
       Products: items.filter((item) => item.id_sp !== id_sp),
     });
+  }
+  EditProduct(id_sp: number) {
+    // idk 
+    
   }
 }
 
