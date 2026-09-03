@@ -17,7 +17,8 @@ export const routeConfig: Routes = [
     {
         path: 'product',
         component: Product,
-        title: "Product"
+        title: "Product",
+        
     },
     {
         path: '**',

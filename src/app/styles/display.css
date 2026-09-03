@@ -1,0 +1,12 @@
+#cate-container {
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: cyan;
+}
+.category{
+    width: 120px;
+    height: 150px;
+    /* border-radius: 25%; */
+}

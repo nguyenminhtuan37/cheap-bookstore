@@ -1,13 +1,12 @@
-import { Component, inject, input, OnChanges, signal } from "@angular/core";
-import { LocalStorageService } from "../service/local-storage.service";
+import { Component, inject, input, computed } from "@angular/core";
 import { DataSync } from "../service/updateData.service";
-import { ActivatedRoute, ActivatedRouteSnapshot } from "@angular/router";
-import { filter } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
+
 export interface ProductInfo {
     id_sp: number,
     ten_sp: string,
     danh_muc: string,
-    don_vi_tinh: string,
+    don_vi_tinh: string | null,
     gia_nhap: number,
     gia_ban: number,
     so_luong_ton: number,
@@ -19,57 +18,61 @@ export interface ProductState {
 }
 @Component({
     selector: "product",
-    styleUrls: ['../app.css'],
-    template: `
-    <div id="table-legend">
-      <span class="column-name">Tên sản phẩm</span>
-      <span class="column-name">Id sản phẩm</span>
-      <span class="column-name">Danh mục</span>
-      <span class="column-name">Đơn vị tính</span>
-      <span class="column-name">Giá nhập</span>
-      <span class="column-name">Giá bán</span>
-      <span class="column-name">Số lượng tồn</span>
-      <span class="column-name">Mức tồn tối thiểu</span>
-      <span class="column-name">Trạng thái</span>
-    </div>
-      @for (item of items; track $index) {
-        <div class="product-container">
-          <span class="text_sp"> {{ item.ten_sp }} </span>
-          <span class="text_sp"> {{ item.id_sp }} </span>
-          <div class="text_sp"> {{ item.danh_muc }} </div>
-          <div class="text_sp"> {{ item.don_vi_tinh }} </div>
-          <div class="text_sp"> {{ item.gia_nhap }} </div>
-          <div class="text_sp"> {{ item.gia_ban }} </div>
-          <div class="text_sp"> {{ item.so_luong_ton }} </div>
-          <div class="text_sp"> {{ item.muc_ton_toi_thieu }} </div>
-          <div class="text_sp"> {{ item.trang_thai }} </div>
-          <div class="ActionButton" (click)="EditProduct(item.id_sp)">Edit</div>
-          <div class="ActionButton" (click)="DestroyProduct(item.id_sp)">Delete</div>
-        </div>
-      }
-    `,
+    styleUrls: ['../styles/app.css', '../styles/display.css'],
+    templateUrl: "../products.html",
     imports: []
 })
 export class Product  {
-  private dataSync = inject(DataSync);
-  private localStorageService = inject(LocalStorageService);
-  items = this.dataSync.state().Products ?? [];
-  filteredItems: ProductInfo[] = [];
-  constructor() {
-    this.filteredItems = this.items;
-    console.log(this.filteredItems);
+  dataSync = inject(DataSync);
+  route = inject(ActivatedRoute);
+  router = inject(Router);
+
+  selectedOption = computed(() => {
+    const dataView = this.dataSync.state().Products ?? [];
+    
+    return dataView.sort((a, b) => a.ten_sp.localeCompare(b.ten_sp))
+  })
+
+  // whats next?
+  constructor () {
+    this.route.queryParams.subscribe((params) => {
+      const sort = params['sort'] || "price";
+      const filter = params['danh_muc'] || "";
+      this.LoadProducts(sort, filter);
+    })
   }
-  DestroyProduct(id_sp: number) {
-    // something...
-    const items = this.dataSync.state().Products ?? [];
-    this.dataSync.state.set({
-      Products: items.filter((item) => item.id_sp !== id_sp),
+  LoadProducts(sortBy: string, filter: string): void {
+    // const items = this.dataSync.state().Products ?? [];
+    // this.dataSync.state.set(() => {
+    this.selectedOption.set(() => {
+      
+    })
+  }
+  sortTable(event: Event) {
+    const sort = (event.target as HTMLSelectElement).value;
+    this.router.navigate(['/products'], {
+      queryParams: {sort},
+      queryParamsHandling: 'merge',
     });
   }
-  EditProduct(id_sp: number) {
-    // idk 
+  
+
+  // DestroyProduct(id_sp: number) {
+  //   // something...
+  //   const items = this.dataSync.state().Products ?? [];
+  //   this.dataSync.state.set({
+  //     Products: items.filter((item) => item.id_sp !== id_sp),
+  //   });
+  //   window.alert(`Đã xóa sản phẩm mã ${id_sp}`)
+  // }
+  // EditProduct(id_sp: number) {
+  //   // idk 
+  //   const items = this.dataSync.state().Products ?? [];
     
-  }
+  // }
+  // AddProduct() {
+    
+  // }
 }
 
       
