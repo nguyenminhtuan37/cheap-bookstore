@@ -1,11 +1,11 @@
-import { Service, signal, computed } from "@angular/core";
-import { ProductInfo, ProductState } from "../modules/products";
+import { Service, signal, computed, effect } from "@angular/core";
+import { ProductInfo, ProductState } from "../components/products";
 
 @Service({})
 export class DataSync {
   state = signal<ProductState>({Products: JSON.parse(localStorage.getItem('demoData')!)});
 
-  syncStorage = computed(() => {
+  syncStorage = effect(() => {
     localStorage.setItem('demoData', JSON.stringify(this.state()));
   });
 }

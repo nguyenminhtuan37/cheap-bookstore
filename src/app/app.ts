@@ -1,16 +1,15 @@
 import { Component, inject, input } from '@angular/core';
 import { LocalStorageService } from './service/local-storage.service';
-import { ProductState } from './modules/products';
+import { ProductState } from './components/products';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 import data from "./data.json";
-import categories from "./category.json";
+
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, RouterLink],
-  templateUrl: './app.html',
+  templateUrl: './models/app.html',
   styleUrls: ['./styles/app.css'],
 })
 export class App {
@@ -21,7 +20,7 @@ export class App {
   ngOnInit(): void {
 //    if (!this.loadData()) {
       this.saveData(data);
-      console.log(data)
+
     // } else {
     //   console.log("Already exists!")
     // }
