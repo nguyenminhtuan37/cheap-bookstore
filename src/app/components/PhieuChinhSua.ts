@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 
 import { DataSync } from '../service/updateData.service';
-import {form, FormField, required, email} from '@angular/forms/signals';
+import {form, FormField} from '@angular/forms/signals';
 import { ProductInfo } from './products';
 
 interface ProductFormModel {
@@ -29,7 +29,7 @@ export class ChinhSuaSp {
     id_sp: 1000,
     ten_sp: '',
     danh_muc: '',
-    don_vi_tinh: 'VNĐ',
+    don_vi_tinh: 'viet nam dong',
     gia_nhap: 0,
     gia_ban: 0,
     so_luong_ton: 0,
@@ -50,5 +50,12 @@ export class ChinhSuaSp {
 
   EditProduct(id_sp: number) {
     const formData = this.ProductModel();
+    const items = this.dataSync.state().Products ?? [];
+    let foundItem = items.find(item => item.id_sp === id_sp);
+    this.ProductModel.set(
+      foundItem as ProductFormModel,
+    )
+    console.log(this.ProductModel())
   }
+  
 }

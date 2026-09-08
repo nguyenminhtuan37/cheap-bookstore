@@ -12,5 +12,21 @@
 }
 body{
     display: flex;
-    width: 1500px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 85%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+tr:nth-child(odd) {
+  background-color: blueviolet;
+  color: white;
 }

@@ -11,7 +11,6 @@
             <td>Tên sản phẩm</td>
             <td>Id sản phẩm</td>
             <td>Danh mục</td>
-            <td>Đơn vị tính</td>
             <td>Giá nhập</td>
             <td>Giá bán</td>
             <td>Số lượng tồn</td>
@@ -24,17 +23,16 @@
         } @else {
                 @for (item of dataSync.state().Products; track $index) {
                     <tr>
-                        <td>{{ item.ten_sp }}</td>
+                        <td [style.color]="item.trang_thai ? null : 'orange'">{{ item.ten_sp }}</td>
                         <td>{{ item.id_sp }}</td>
                         <td>{{ item.danh_muc }}</td>
-                        <td>{{ item.don_vi_tinh }}</td>
-                        <td>{{ item.gia_nhap }}</td>
-                        <td>{{ item.gia_ban }}</td>
+                        <td>{{ item.gia_nhap | currencyByChoice : item.don_vi_tinh }}</td>
+                        <td>{{ item.gia_ban | currencyByChoice : item.don_vi_tinh }}</td>
                         <td>{{ item.so_luong_ton }}</td>
                         <td>{{ item.muc_ton_toi_thieu }}</td>
-                        <td>{{ item.trang_thai }}</td>
+                        <td>{{ (item.trang_thai) ? "Còn hàng" : "Hết hàng" }}</td>
                         <td>
-                            <button>Sửa</button>
+                            <button (click)="EditProduct(item.id_sp)">Sửa</button>
                             <button (click)="DeleteProduct(item.id_sp)">Xóa</button>
                         </td>
                     </tr>

@@ -41,6 +41,10 @@ import {
   TransferState,
   Version,
   ViewContainerRef,
+  __async,
+  __objRest,
+  __spreadProps,
+  __spreadValues,
   assertInInjectionContext,
   booleanAttribute,
   computed,
@@ -83,13 +87,7 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-LQ4UOURC.js";
-import {
-  __async,
-  __objRest,
-  __spreadProps,
-  __spreadValues
-} from "./chunk-6RMQCMDL.js";
+} from "./chunk-YC3NH2NP.js";
 
 // node_modules/@angular/common/fesm2022/_platform_location-chunk.mjs
 var _DOM = null;
@@ -7188,4 +7186,4 @@ export {
   withHttpTransferCache,
   httpResource
 };
-//# sourceMappingURL=chunk-URVICGZN.js.map
+//# sourceMappingURL=chunk-U6FWQUDE.js.map
