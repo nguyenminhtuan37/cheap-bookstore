@@ -30,7 +30,7 @@
         "gia_ban": 1233,
         "so_luong_ton": 12,
         "muc_ton_toi_thieu": 3,
-        "trang_thai": false
+        "trang_thai": true
     },
     {
         "id_sp": 4,
@@ -41,7 +41,7 @@
         "gia_ban": 1233,
         "so_luong_ton": 12,
         "muc_ton_toi_thieu": 3,
-        "trang_thai": false
+        "trang_thai": true
     },
     {
         "id_sp": 5,
@@ -52,7 +52,7 @@
         "gia_ban": 1233,
         "so_luong_ton": 12,
         "muc_ton_toi_thieu": 3,
-        "trang_thai": false
+        "trang_thai": true
     },
     {
         "id_sp": 6,
@@ -63,7 +63,7 @@
         "gia_ban": 1233,
         "so_luong_ton": 12,
         "muc_ton_toi_thieu": 3,
-        "trang_thai": false
+        "trang_thai": true
     },
     {
         "id_sp": 7,
@@ -74,7 +74,7 @@
         "gia_ban": 1233,
         "so_luong_ton": 12,
         "muc_ton_toi_thieu": 3,
-        "trang_thai": false
+        "trang_thai": true
     },
     {
         "id_sp": 8,

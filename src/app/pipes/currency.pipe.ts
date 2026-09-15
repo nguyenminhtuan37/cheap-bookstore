@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { Constant } from "../constants/data-constants";
 
 @Pipe({
     name: 'currencyByChoice'
@@ -6,8 +7,8 @@ import { Pipe, PipeTransform } from "@angular/core";
 export class CurrencyByChoice implements PipeTransform {
     transform(value: number, choice: string): string {
         const curSymbols = new Map<string, string>();
-        curSymbols.set("viet nam dong", "đ");
-        curSymbols.set("đô la mỹ", "đô la Mỹ");
+        curSymbols.set(Constant.DVT.VND, "đ");
+        curSymbols.set(Constant.DVT.USD, "đô la Mỹ");
         curSymbols.set("yên nhật", "yên Nhật");
         curSymbols.set("euro", "euro Âu")
         // Thêm dấu phẩy

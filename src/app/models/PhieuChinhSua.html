@@ -2,7 +2,7 @@
       @if (isEditing){
         <h1>Phiếu chỉnh sửa</h1>
       }
-      @if (isMakingNew){
+      @else {
         <h1>Phiếu tạo mới</h1>
       }
         <section>
@@ -14,10 +14,10 @@
           <h2>Tiền</h2>
           <span>Đơn vị tính</span>
           <select [formField]="ProductForm.don_vi_tinh">
-            <option value="VietNamDong">VNĐ</option>
-            <option value="Dollar">Đô la</option>
-            <option value="JPY">Yên Nhật</option>
-            <option value="Euro">Đồng Euro</option>
+            <option [value]="DVT.VND">VNĐ</option>
+            <option value="đô la mỹ">Đô la</option>
+            <option value="yên nhật">Yên Nhật</option>
+            <option value="euro">Đồng Euro</option>
           </select> <br>
           <span>Giá nhập</span> <input type="number" [formField]="ProductForm.gia_nhap" /> <br>
           <span>Giá bán</span> <input type="number" [formField]="ProductForm.gia_ban" />
@@ -27,6 +27,6 @@
           <span>Số lượng tồn</span> <input type="number" [formField]="ProductForm.so_luong_ton" /> <br>
           <span>Mức tồn tối thiểu</span> <input type="number" [formField]="ProductForm.muc_ton_toi_thieu" />
         </section>
-        <button>Chỉnh sửa</button>
-        <button (click)="AddProduct()">Tạo mới</button>
+        <button (click)="updateProduct()">Tạo mới</button>
+        <button (click)="resetForm()">Xóa chỉnh sửa</button>
 </div>

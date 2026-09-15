@@ -16,6 +16,7 @@ export interface categories {
     selector: "category",
     styleUrls: ["../styles/display.css", "../styles/app.css"],
     template: `
+    
     <table>
         <tr>
             <td>Id</td>
@@ -84,7 +85,7 @@ export class Category{
         });
     }
     EditItem(id_cate: number) {
-
+        
     }
     // private data = signal<categories>(
     //     JSON.parse(demoCates) as categories

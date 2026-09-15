@@ -1,9 +1,9 @@
-import { Component, inject, signal } from "@angular/core";
+import { Component, inject, input } from "@angular/core";
 import { DataSync } from "../service/updateData.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ChinhSuaSp } from "./PhieuChinhSua";
+import { ProductAction } from "../service/ProductAction";
 import { CurrencyByChoice } from "../pipes/currency.pipe";
-
+import { ChinhSuaSp } from "./PhieuChinhSua";
 
 export interface ProductInfo {
     id_sp: number,
@@ -23,24 +23,23 @@ export interface ProductState {
     selector: "product",
     styleUrls: ['../styles/app.css', '../styles/display.css'],
     templateUrl: "../models/products.html",
-    imports: [ChinhSuaSp, CurrencyByChoice]
+    imports: [CurrencyByChoice, ChinhSuaSp]
 })
 export class Product  {
   dataSync = inject(DataSync);
   route = inject(ActivatedRoute);
   router = inject(Router);
-  
+  private productAction = inject(ProductAction);
+  editRequest = false;
   // readonly!
   ProductsView = this.dataSync.state().Products ?? [];
   // whats next?
-    DeleteProduct(id: number) {
-    const items = this.dataSync.state().Products ?? [];
-    this.dataSync.state.set(
-      {Products: items.filter((item) => item.id_sp !== id)}
-    )
+  DeleteProduct(id: number): void {
+    this.productAction.deleteProduct(id);
   }
   EditProduct(id: number) {
-    
+    this.productAction.selectProductForEdit(id);
+    this.editRequest = true;
   }
 }
 

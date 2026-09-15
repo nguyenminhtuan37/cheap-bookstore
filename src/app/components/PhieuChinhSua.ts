@@ -1,8 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, input, output, signal } from '@angular/core';
 
 import { DataSync } from '../service/updateData.service';
 import {form, FormField} from '@angular/forms/signals';
-import { ProductInfo } from './products';
+import { Constant } from '../constants/data-constants';
+import { ProductAction } from '../service/ProductAction';
 
 interface ProductFormModel {
   id_sp: number;
@@ -15,6 +16,18 @@ interface ProductFormModel {
   muc_ton_toi_thieu: number;
   trang_thai: boolean;
 }
+
+const DEFAULT_FORM_MODEL: ProductFormModel = {
+  id_sp: 0,
+  ten_sp: '',
+  danh_muc: '',
+  don_vi_tinh: '',
+  gia_nhap: 0,
+  gia_ban: 0,
+  so_luong_ton: 0,
+  muc_ton_toi_thieu: 0,
+  trang_thai: true,
+}
 @Component({
   selector: 'PhieuChinhSua',
   imports: [FormField],
@@ -23,10 +36,11 @@ interface ProductFormModel {
 })
 export class ChinhSuaSp {
   dataSync = inject(DataSync);
-  isEditing: boolean = false;
-  isMakingNew: boolean = true;
+  productAction = inject(ProductAction);
+  isEditing = false;
+  DVT = Constant.DVT;
   ProductModel = signal<ProductFormModel>({
-    id_sp: 1000,
+    id_sp: 0,
     ten_sp: '',
     danh_muc: '',
     don_vi_tinh: 'viet nam dong',
@@ -35,27 +49,34 @@ export class ChinhSuaSp {
     so_luong_ton: 0,
     muc_ton_toi_thieu: 0,
     trang_thai: true,
-  });
-  
+});
+
   ProductForm = form(this.ProductModel);
-  AddProduct() {
-    // add it up
-    const formData = this.ProductModel();
-    const items = [...(this.dataSync.state().Products ?? []), ...[formData as ProductInfo]];
-    console.log(items);
-    this.dataSync.state.set(
-      {Products: items}
-    )
+  constructor () {
+    effect(() => {
+      const selected = this.productAction.selectedProduct();
+      if (selected) {
+        this.ProductModel.set({...selected});
+      } else {
+        this.resetForm();
+      }
+    })
   }
 
-  EditProduct(id_sp: number) {
-    const formData = this.ProductModel();
-    const items = this.dataSync.state().Products ?? [];
-    let foundItem = items.find(item => item.id_sp === id_sp);
-    this.ProductModel.set(
-      foundItem as ProductFormModel,
-    )
-    console.log(this.ProductModel())
+  updateProduct() {
+    // add it up
+    const FormModel = this.ProductModel();
+    if(FormModel.id_sp & +(FormModel.id_sp > 0)) {
+      // Chỉnh sửa
+      this.isEditing = true;
+      this.productAction.updateProduct(FormModel);
+    } else {
+      // Thêm mới
+      this.productAction.addProduct(FormModel);
+    }
   }
-  
+  resetForm() {
+    this.ProductModel.set({...DEFAULT_FORM_MODEL});
+    this.productAction.clearSelection();
+  }
 }
