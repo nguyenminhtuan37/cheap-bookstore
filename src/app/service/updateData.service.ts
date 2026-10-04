@@ -1,5 +1,5 @@
-import { Service, signal, effect } from "@angular/core";
-import { ProductInfo, ProductState } from "../modules/products";
+import { Service, signal, computed, effect } from "@angular/core";
+import { ProductInfo, ProductState } from "../components/products";
 
 @Service({})
 export class DataSync {

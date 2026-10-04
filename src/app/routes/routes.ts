@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
-import {Category} from '../modules/Category';
-import {Product} from '../modules/products';
-import {Home} from '../modules/home'
+import {Category} from '../components/Category';
+import {Product} from '../components/products';
+import {Home} from '../components/home'
 
 export const routeConfig: Routes = [
     {
@@ -17,7 +17,7 @@ export const routeConfig: Routes = [
     {
         path: 'product',
         component: Product,
-        title: "Product"
+        title: "Product",
     },
     {
         path: '**',
