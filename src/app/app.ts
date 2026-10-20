@@ -1,16 +1,16 @@
 import { Component, inject, input } from '@angular/core';
-import { LocalStorageService } from './service/local-storage.service';
-import { ProductState } from './components/products';
+import { LocalStorageService } from './shared/services/local-storage.service';
+import { ProductState } from './shared/models/product.model';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import {ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
-import data from "./data.json";
-
+import productsList from "./shared/data/data.json";
+import categoriesData from "./shared/data/category.json";
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink],
-  templateUrl: './models/app.html',
-  styleUrls: ['./styles/app.css'],
+  templateUrl: './app.html',
+  styleUrls: ['./shared/styles/app.css'],
 })
 export class App {
  
@@ -18,18 +18,18 @@ export class App {
   private route = inject(ActivatedRoute);
 
   ngOnInit(): void {
-//    if (!this.loadData()) {
-      this.saveData(data);
-
-    // } else {
-    //   console.log("Already exists!")
-    // }
+    if (!this.loadData('productsList')) {
+      this.saveData('productsList', productsList);
+    }
+    if (!this.loadData('categoriesData')) {
+      this.saveData('categoriesData', categoriesData)
+    }
   }
-  saveData(data: any): void {
-    this.localStorageService.setItem('demoData', data);
+  saveData(key: string, data: any): void {
+    this.localStorageService.setItem(key, data);
   }
-  loadData(): ProductState {
-    return this.localStorageService.getItem('demoData');
+  loadData(key: string): ProductState {
+    return this.localStorageService.getItem(key);
   }
   title = 'My new warehouse';
 }

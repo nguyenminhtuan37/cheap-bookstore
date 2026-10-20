@@ -1,0 +1,77 @@
+* {box-sizing: border-box}
+
+.category{
+    width: 120px;
+    height: 150px;
+    /* border-radius: 25%; */
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 800px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+th {
+  background-color: green;
+}
+button {
+  border: 2px solid black;
+  box-shadow: 5px black;
+}
+.form-popup {
+  position: fixed;
+  top: calc(50% - 150px);
+  left: calc(50% - 150px);
+  border: 3px solid gray;
+  z-index: 9;
+  
+}
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+.form-container input {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+.form-container input:focus {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+.btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  background-color: palegreen;
+  opacity: 0.8;
+}
+.btn:hover {
+  opacity: 1;
+}
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+.cancel {
+  background-color: red;
+}

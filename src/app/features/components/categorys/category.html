@@ -1,0 +1,40 @@
+<h3> Quản lý category</h3>
+    <div id="">
+        <button class="btn" (click)="onHandleCreate()">Tạo mới</button>
+        <span>Tìm kiếm</span>
+        <input type="text" >
+    </div>
+<table>
+        <tr>
+            <td>Id</td>
+            <td>Tên danh mục</td>
+            <td>Mô tả</td>
+            <td>Actions</td>
+        </tr>
+<!--         
+        <tr class="category-list" [class]="rowClasses()">
+            <td><input type="number" [formField]="CateForm.id" /></td>
+            <td><input type="text" [formField]="CateForm.name" /></td>
+            <td><input type="text" [formField]="CateForm.desc" /></td>
+            <td>
+                <button>Tạo mới</button>
+                <button>Hủy bỏ</button>
+            </td>
+        </tr> -->
+        @for (cate of this.cateSync.demoCates().categoryList ?? []; track $index) {
+            <tr>
+                <td>{{ cate.id }}</td>
+                <td>{{ cate.name }}</td>
+                <td>{{ cate.desc }}</td>
+                <td>
+                    <button class="btn" (click)="updateItem(cate)">Sửa</button>
+                    <button class="btn" (click)="onHandleConfirmDelete(cate)" style="margin-left: 15px;">Xóa</button>
+                </td>
+            </tr>
+        }
+    </table>
+
+<!-- Popup thêm mới và chỉnh sửa category -->
+@if(popupState !== 'none'){
+    <editCategory [(state)] = 'popupState' [selectItem]="selectItem" />
+}

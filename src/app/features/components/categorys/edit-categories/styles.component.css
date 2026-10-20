@@ -1,0 +1,29 @@
+.form-popup {
+  position: fixed;
+  top: calc(50% - 150px);
+  left: calc(50% - 150px);
+  border: 3px solid gray;
+  background-color: white;
+  z-index: 9; 
+}
+.form-container input {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: whitesmoke;
+}
+.form-container input:focus {
+  background: #f1f1f1;
+}
+.btn {
+  width: auto;
+  font-size: 15px;
+  padding: 0px 5px;
+}
+.cancel {
+  background-color: red;
+}
+.save {
+  background-color: greenyellow;
+}

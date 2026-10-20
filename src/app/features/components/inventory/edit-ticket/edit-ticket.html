@@ -1,0 +1,29 @@
+<div id="ProductForm">
+      @if (isEditing){
+        <h1>Phiếu chỉnh sửa</h1>
+      }
+      @else {
+        <h1>Phiếu tạo mới</h1>
+      }
+        <section>
+          <span>Tên sản phẩm</span> <input type="text" [formField]="ProductForm.ten_sp"/> <br>
+          <span>Danh mục</span>  <input type="text" [formField]="ProductForm.danh_muc"/>
+        </section>
+        <section>
+          <span>Đơn vị tính</span>
+          <select [formField]="ProductForm.don_vi_tinh">
+            <option [value]="DVT.VND">VND</option>
+            <option [value]="DVT.USD">USD</option>
+            <option [value]="DVT.JPY">JPY</option>
+            <option [value]="DVT.EUR">EUR</option>
+          </select> <br>
+          <span>Giá nhập</span> <input type="number" [formField]="ProductForm.gia_nhap" /> <br>
+          <span>Giá bán</span> <input type="number" [formField]="ProductForm.gia_ban" />
+        </section>
+        <section>  
+          <span>Số lượng tồn</span> <input type="number" [formField]="ProductForm.so_luong_ton" /> <br>
+          <span>Mức tồn tối thiểu</span> <input type="number" [formField]="ProductForm.muc_ton_toi_thieu" />
+        </section>
+        <button (click)="updateProduct()">Tạo mới</button>
+        <button (click)="resetForm()">Xóa chỉnh sửa</button>
+</div>
