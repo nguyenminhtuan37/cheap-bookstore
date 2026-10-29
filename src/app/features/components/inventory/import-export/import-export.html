@@ -1,18 +1,67 @@
-<h2>Phiếu Nhập-Xuất</h2>
-<!--Ghi phiếu nhập/ xuất-->
-<table>
-    <tr>
-        <td>STT</td>
-        <td>Chọn sản phẩm</td>
-        <td>Số lượng</td>
-        <td>Đơn vị tính</td>
-        <td>Nhập/ Xuất</td>
-        <td>Thành tiền</td>
-    </tr>
-    <tr>
-        
-    </tr>
-</table>
+<div id="receiptFormContainer">
+@if(isImporting) {
+    <button class="state-btn active">Phiếu Nhập</button>
+    <button class="state-btn">Phiếu Xuất</button>
+    Ghi phiếu nhập/ xuất
+    <div id="editContainer">
+        <div class="editField id-sp">
+            <span>Id sản phẩm</span><br>
+            <input type="number" [formField]="formReceipt.id_sp">
+        </div>
+        <div class="editField so-luong">
+            <span>Số lượng</span><br>
+            <input type="number" [formField]="formReceipt.so_luong">
+        </div>
+        <div class="editField don-gia">
+            <span>Đơn giá</span><br>
+            <input type="number" [formField]="formReceipt.don_gia">
+        </div>
+        <button class="btn add-item">+ Thêm sản phẩm</button>
+    </div>
+    <table>
+        <tr>
+            <td>Id sản phẩm</td>
+            <td>Số lượng</td>
+            <td>Đơn giá</td>
+            <td>Thành tiền</td>
+            <td>Xóa</td>
+        </tr>
+        @if (AddedItems().displayItems?.length === 0) {
+            <h2>Nothing to see here!</h2>
+        } @else {
+            @for (item of this.AddedItems().displayItems; track $index) {
+                <tr>
+                    <td>{{ item.id_sp }}</td>
+                    <td>{{ item.so_luong }}</td>
+                    <td>{{ item.don_gia }}</td>
+                    <td>{{ (item.so_luong === null || item.don_gia === null) ? 'undefined' : item.so_luong * item.don_gia}}</td>
+                    <td><button class="btn delete">Xóa</button></td>
+                </tr>
+            }
+        }
 
-<button>Xác nhận</button>
-<button>Hủy bỏ</button>
+    </table>
+    <button class="btn save-draft">Lưu nháp</button> 
+    <button class="btn oke">Xác nhận</button>
+    <button class="btn cancel">Hủy bỏ</button>
+}
+@else {
+    <h2>Phiếu Xuất</h2>
+    Ghi phiếu nhập/ xuất
+    <table>
+        <tr>
+            <td>Id sản phẩm</td>
+            <td>Số lượng</td>
+            <td>Trạng thái</td>
+        </tr>
+        <tr>
+            <td><input type="text"></td>
+            <td><input type="text"></td>
+            <td>Hàng mới <input type="checkbox"></td>
+        </tr>
+    </table>
+    <button>Lưu nháp</button>
+    <button>Xác nhận</button>
+    <button>Hủy bỏ</button>
+}
+</div>

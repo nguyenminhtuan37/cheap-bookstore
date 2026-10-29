@@ -1,7 +1,9 @@
 <div class="form-popup">
+    <div id="actionBtn">
+        <button type="button" class="btn cancel" (click)="onHandleCancel()">🗙</button>
+        <button type="button" class="btn save" (click)="onHandleSave()">✓</button>
+    </div>
     <h3>{{ state() === 'create' ? 'Tạo mớii' : 'Cập nhật' }}</h3>
-    <button type="button" class="btn save" (click)="onHandleSave()">✓</button>
-    <button type="button" class="btn cancel" (click)="onHandleCancel()">🗙</button>
     <form class="form-container">
         <section>
             <b>Tên danh mục</b>

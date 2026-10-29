@@ -9,5 +9,5 @@ export class CategorySync {
     demoCates = signal<categories>({
         categoryList: this.localStorageService.getItem("categoriesData")!
     });
-    updateData = effect(() => this.localStorageService.setItem('categoriesData', this.demoCates().categoryList))
+    // updateData = effect(() => this.localStorageService.setItem('categoriesData', this.demoCates().categoryList))
 }

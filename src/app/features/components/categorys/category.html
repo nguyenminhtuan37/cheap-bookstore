@@ -1,8 +1,18 @@
 <h3> Quản lý category</h3>
     <div id="">
         <button class="btn" (click)="onHandleCreate()">Tạo mới</button>
+        <span>Sắp xếp theo</span>
+        <select (change)="sortArray($event)">
+            <option value="name">Tên (Mặc định)</option>
+            <!-- <option value="so_luong_ton">Số lượng tồn</option> -->
+             <option value="desc">Mô tả</option>
+        </select>
+        <select (change)="changeSortDir($event)">
+            <option value="asc">Tăng dần (Mặc định)</option>
+            <option value="desc">Giảm dần</option>
+        </select>
         <span>Tìm kiếm</span>
-        <input type="text" >
+        <input type="text" (input)="searchFunc($event)">
     </div>
 <table>
         <tr>
@@ -21,7 +31,7 @@
                 <button>Hủy bỏ</button>
             </td>
         </tr> -->
-        @for (cate of this.cateSync.demoCates().categoryList ?? []; track $index) {
+        @for (cate of this.cateSync; track $index) {
             <tr>
                 <td>{{ cate.id }}</td>
                 <td>{{ cate.name }}</td>
@@ -36,5 +46,5 @@
 
 <!-- Popup thêm mới và chỉnh sửa category -->
 @if(popupState !== 'none'){
-    <editCategory [(state)] = 'popupState' [selectItem]="selectItem" />
+    <editCategory [(state)] = 'popupState' [selectItem]="selectItem" (eventSucess)="resetData()"/>
 }

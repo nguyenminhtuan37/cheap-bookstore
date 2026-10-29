@@ -2,11 +2,22 @@
 <div id="container1">
     <div id="sorting-bar">
         <span class="">Sắp xếp theo:</span>
-        <select>
-            <option value="">Tên</option>
+        <select (change)="sortArray($event)">
+            <option value="ten_sp">Tên</option>
             <option value="gia_ban">Giá bán</option>
             <option value="gia_nhap">Giá nhập</option>
             <option value="so_luong_ton">Số lượng tồn</option>
+        </select>
+        <select (change)="changeSortDir($event)">
+            <option value="asc">A - Z</option>
+            <option value="desc">Z - A</option>
+        </select>
+        <span>Tìm kiếm</span>
+        <input type="text" (input)="searchItem($event)">
+        <span>Lọc theo: </span>
+        <select (change)="filterBy($event)">
+            <option value="">Tất cả</option>
+            <option value="danh_muc">Danh mục</option>
         </select>
     </div>
     <table>
@@ -24,7 +35,7 @@
         @if (!dataSync.state().Products) {
             <h2>Nothing to see here!</h2>
         } @else {
-                @for (item of dataSync.state().Products; track $index) {
+                @for (item of productSync; track $index) {
                     <tr>
                          <td>{{ item.id_sp }}</td>
                         <td [style.color]="(item.so_luong_ton > item.muc_ton_toi_thieu) ? null : 'orange'">{{ item.ten_sp }}</td>

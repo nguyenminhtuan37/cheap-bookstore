@@ -18,12 +18,17 @@
 }
 .btn {
   width: auto;
-  font-size: 15px;
-  padding: 0px 5px;
+  font-size: 12px;
+  padding: 0px 10px;
 }
 .cancel {
   background-color: red;
 }
 .save {
   background-color: greenyellow;
+}
+#actionBtn {
+  display: flex;
+  height: auto;
+  flex-direction: row-reverse;
 }
